@@ -1,6 +1,7 @@
 const urlCategory = 'https://api.mercadolibre.com/sites/MLB/categories';
 const urlItemName = 'https://api.mercadolibre.com/sites/MLB/search?q=';
-const urlItemCategory = 'https://api.mercadolibre.com/sites/MLB/search?category=';
+
+// const urlItemCategory = 'https://api.mercadolibre.com/sites/MLB/search?category=';
 
 export async function getCategories() {
   const request = await fetch(urlCategory);
@@ -14,7 +15,7 @@ export async function getProductsFromCategoryAndQuery(id, category) {
     const requestId = await (await fetch(`${urlItemName}${id}`)).json();
     return Promise.any([requestCat, requestId]).then((data) => data);
   } catch (err) {
-    console.log(err);
+    console.warn(err.message);
   }
 }
 
