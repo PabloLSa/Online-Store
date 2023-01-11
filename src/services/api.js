@@ -1,10 +1,24 @@
+const urlCategory = 'https://api.mercadolibre.com/sites/MLB/categories';
+const urlItemName = 'https://api.mercadolibre.com/sites/MLB/search?q=';
+const urlItemCategory = 'https://api.mercadolibre.com/sites/MLB/search?category=';
+
 export async function getCategories() {
-  // Implemente aqui
+  const request = await fetch(urlCategory);
+  const response = await request.json();
+  return response;
 }
 
-export async function getProductsFromCategoryAndQuery(/* categoryId, query */) {
-  // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
+export async function getProductsFromCategoryAndQuery(id, category) {
+  try {
+    const requestCat = await (await fetch(`${urlItemName}${category}`)).json();
+    const requestId = await (await fetch(`${urlItemName}${id}`)).json();
+    return Promise.any([requestCat, requestId]).then((data) => data);
+  } catch (err) {
+    console.log(err);
+  }
 }
+
+getProductsFromCategoryAndQuery();
 
 export async function getProductById() {
   // Esta implementação específica não é avaliada, mas pode ajudar você 🙂
