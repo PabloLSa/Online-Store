@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import CategorySearch from '../components/CategorySearch';
-// import CategorySearch from '../components/CategorySearch';
 import Input from '../components/Input';
-import RadioButon from '../components/RadioButon';
 
 export default class Home extends Component {
   render() {
