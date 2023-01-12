@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
-import ProductCard from '../components/ProductCard';
+import { Button } from '../components/Button';
+import { ProductCard } from '../components/ProductCard';
 import Input from '../components/Input';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
