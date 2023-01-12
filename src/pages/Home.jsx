@@ -21,7 +21,7 @@ export default class Home extends Component {
 
   // Função criada pra passar a logica do value dos inputes pro estado, assim pode ser utilizada no envio da props pro documento e no para renderização
   onInputChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value }, name === 'filtro' && this.handleCategoryId);
+    this.setState({ [name]: value }, () => name === 'filtro' && this.handleCategoryId());
   };
 
   handleCategoryId = async () => {
