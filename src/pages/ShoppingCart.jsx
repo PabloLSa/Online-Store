@@ -55,17 +55,24 @@ export default class ShoppingCart extends Component {
   ));
 
   render() {
+    const { cart } = this.state;
     return (
       <div
         data-testid="shopping-cart-empty-message"
+        key="id"
       >
-        {/* { localStorage.getItem() } */}
-        <ListedProduct
-          key={ product.id }
-          onClick={ onClick }
-          productName={ product.name }
-          productQuantity={ product.quantity }
-        />
+        {
+          cart.map((product, index) => (
+            <ListedProduct
+              key={ product.id + index }
+              productName={ product.title }
+              productValue={ product.price }
+              productThumbnail={ product.thumbnail }
+              productQuantity={ 1 }
+            />
+          ))
+        }
+
         Seu carrinho está vazio
 
       </div>
