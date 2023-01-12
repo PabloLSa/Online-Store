@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import ProductCard from '../components/ProductCard';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
@@ -49,7 +50,7 @@ export default class Home extends Component {
          )}
 
         <section>
-          <Button onSaveButton={ this.onSaveButton } />
+          <Button onSaveButton={ this.onSaveButton } testid="query-button" />
           <Input value={ search } onInputChange={ this.onInputChange } />
         </section>
 
@@ -65,8 +66,14 @@ export default class Home extends Component {
         <Link to="/shoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
 
         {apiResults.length > 0 ? (
-          apiResults.map((item) => (
-            <p key={ item.id } data-testid="product">{item.title}</p>
+          apiResults.map(({ id, title, price, thumbnail }) => (
+            <ProductCard
+              key={ id }
+              title={ title }
+              price={ price }
+              thumbnail={ thumbnail }
+              id={ id }
+            />
           ))
         ) : (
           <span>Nenhum produto foi encontrado</span>
