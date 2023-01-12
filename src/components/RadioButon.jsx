@@ -8,7 +8,6 @@ class RadioButon extends Component {
 
   async componentDidMount() {
     const categorie = await getCategories();
-    console.log(categorie);
     this.setState({
       categorie,
     });
