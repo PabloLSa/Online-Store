@@ -59,7 +59,13 @@ export default class ShoppingCart extends Component {
       <div
         data-testid="shopping-cart-empty-message"
       >
-        <ListedProduct />
+        {/* { localStorage.getItem() } */}
+        <ListedProduct
+          key={ product.id }
+          onClick={ onClick }
+          productName={ product.name }
+          productQuantity={ product.quantity }
+        />
         Seu carrinho está vazio
 
       </div>
