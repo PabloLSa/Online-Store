@@ -12,11 +12,19 @@ export default class Home extends Component {
     filtro: '',
     apiResults: [],
     categories: [],
+    cart: [],
   };
 
   async componentDidMount() {
     const categories = await getCategories();
     this.setState({ categories });
+  }
+
+  componentDidUpdate(prevState) {
+    const { cart } = this.state;
+    if (prevState.cart !== cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
   }
 
   // Função criada pra passar a logica do value dos inputes pro estado, assim pode ser utilizada no envio da props pro documento e no para renderização
@@ -35,6 +43,14 @@ export default class Home extends Component {
     const { search } = this.state;
     const queryApi = await getProductsFromCategoryAndQuery('', search);
     this.setState({ apiResults: queryApi.results });
+  };
+
+  addToCart = (product) => {
+    this.setState((prevState) => {
+      const { cart } = prevState;
+      cart.push(product);
+      return { cart };
+    });
   };
 
   render() {
@@ -66,7 +82,17 @@ export default class Home extends Component {
 
         {apiResults.length > 0 ? (
           apiResults.map((item) => (
-            <p key={ item.id } data-testid="product">{item.title}</p>
+            <div key={ item.id } data-testid="product">
+              <p>{item.title}</p>
+              <button
+                type="button"
+                data-testid="product-add-to-cart"
+                onClick={ () => this.addToCart(item) }
+              >
+                Adicionar ao carrinho
+
+              </button>
+            </div>
           ))
         ) : (
           <span>Nenhum produto foi encontrado</span>
