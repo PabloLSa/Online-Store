@@ -59,6 +59,7 @@ export default class ShoppingCart extends Component {
       <div
         data-testid="shopping-cart-empty-message"
       >
+        <ListedProduct />
         Seu carrinho está vazio
 
       </div>
