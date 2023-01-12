@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { ProductCard } from '../components/ProductCard';
 import Input from '../components/Input';
+import ProductCard from '../components/ProductCard';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
@@ -88,6 +89,7 @@ export default class Home extends Component {
          )}
 
         <section>
+<<<<<<< HEAD
           <Button
             buttonText="Buscar"
             onSaveButton={ this.onSaveButton }
@@ -95,6 +97,9 @@ export default class Home extends Component {
           />
           {' '}
           <span data-testid="shopping-cart-size">{renderQty}</span>
+=======
+          <Button onSaveButton={ this.onSaveButton } testid="query-button" />
+>>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
           <Input value={ search } onInputChange={ this.onInputChange } />
         </section>
 

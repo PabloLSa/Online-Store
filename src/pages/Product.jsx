@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { getProductById } from '../services/api';
@@ -13,19 +14,33 @@ export default class Product extends Component {
     thumbnail: '',
     available: 0,
     renderQty: 0,
+=======
+import Button from '../components/Button';
+import { getProductById } from '../services/api';
+
+export default class Product extends Component {
+  state = {
+    title: '',
+    price: '',
+    thumbnail: '',
+>>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
   };
 
   async componentDidMount() {
     await this.getProducts();
+<<<<<<< HEAD
     const sum = await sumQty();
     this.setState({
       renderQty: sum,
     });
+=======
+>>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
   }
 
   getProducts = async () => {
     const { match: { params: { id } } } = this.props;
 
+<<<<<<< HEAD
     const { title, price, thumbnail,
       available_quantity: available } = await getProductById(id);
 
@@ -64,6 +79,15 @@ export default class Product extends Component {
 
   render() {
     const { title, price, thumbnail, renderQty } = this.state;
+=======
+    const { title, price, thumbnail } = await getProductById(id);
+    console.log(title, price, thumbnail);
+    this.setState({ title, price, thumbnail });
+  };
+
+  render() {
+    const { title, price, thumbnail } = this.state;
+>>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
     return (
       <div>
         <section>
@@ -71,6 +95,7 @@ export default class Product extends Component {
         </section>
         <section>
           <h1 data-testid="product-detail-name">{title}</h1>
+<<<<<<< HEAD
           <h4 data-testid="product-detail-price">{`R$${price}`}</h4>
         </section>
         <Button testid="shopping-cart-buttons">Buscar</Button>
@@ -83,6 +108,11 @@ export default class Product extends Component {
           <span data-testid="shopping-cart-size">{renderQty}</span>
         </Button>
         <Link to="/shoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
+=======
+          <h4 data-testid="product-detail-price">{price}</h4>
+        </section>
+        <Button testid="shopping-cart-buttons" />
+>>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
       </div>
     );
   }
