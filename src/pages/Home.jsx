@@ -12,11 +12,13 @@ export default class Home extends Component {
     // categories: [],
   };
 
+  // Função criada pra passar a logica do value dos inputes pro estado, assim pode ser utilizada no envio da props pro documento e no para renderização
   onInputChange = ({ target }) => {
     const search = target.value;
     this.setState({ search });
   };
 
+  // logica que faz a renderização durante o click
   onSaveButton = async () => {
     const { search } = this.state;
     const queryApi = await getProductsFromCategoryAndQuery('', search);
