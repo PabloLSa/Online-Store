@@ -85,34 +85,28 @@ export default class Home extends Component {
 
         <Link to="/shoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
 
-        {apiResults.length > 0 ? (
+        {
+          apiResults.length > 0
+            ? apiResults.map((item) => (
+              <div key={ item.id }>
+                <ProductCard
+                  title={ item.title }
+                  price={ item.price }
+                  thumbnail={ item.thumbnail }
+                  id={ item.id }
+                />
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  onClick={ () => this.addToCart(item) }
+                >
+                  Adicionar ao carrinho
+                </button>
+              </div>
 
-          apiResults.map((item) => (
-            <div key={ item.id } data-testid="product">
-              <p>{item.title}</p>
-              <button
-                type="button"
-                data-testid="product-add-to-cart"
-                onClick={ () => this.addToCart(item) }
-              >
-                Adicionar ao carrinho
-
-              </button>
-            </div>
-
-          apiResults.map(({ id, title, price, thumbnail }) => (
-            <ProductCard
-              key={ id }
-              title={ title }
-              price={ price }
-              thumbnail={ thumbnail }
-              id={ id }
-            />
-
-          ))
-        ) : (
-          <span>Nenhum produto foi encontrado</span>
-        )}
+            ))
+            : (<span>Nenhum produto foi encontrado</span>)
+        }
 
       </div>
     );
