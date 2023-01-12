@@ -12,7 +12,7 @@ export default class ProductCard extends Component {
           <img src={ thumbnail } alt="product" />
         </Link>
         <h4>{title}</h4>
-        <p>{price}</p>
+        <p>{`R$${price}`}</p>
       </div>
     );
   }
