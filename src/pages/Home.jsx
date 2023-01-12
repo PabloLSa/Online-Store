@@ -50,7 +50,11 @@ export default class Home extends Component {
          )}
 
         <section>
-          <Button onSaveButton={ this.onSaveButton } testid="query-button" />
+          <Button
+            buttonText="Buscar"
+            onSaveButton={ this.onSaveButton }
+            testid="query-button"
+          />
           <Input value={ search } onInputChange={ this.onInputChange } />
         </section>
 

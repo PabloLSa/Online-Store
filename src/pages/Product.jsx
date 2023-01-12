@@ -31,9 +31,9 @@ export default class Product extends Component {
         </section>
         <section>
           <h1 data-testid="product-detail-name">{title}</h1>
-          <h4 data-testid="product-detail-price">{price}</h4>
+          <h4 data-testid="product-detail-price">{`R$${price}`}</h4>
         </section>
-        <Button testid="shopping-cart-buttons" />
+        <Button buttonText="Adcionar ao carrinho" testid="shopping-cart-buttons" />
       </div>
     );
   }
