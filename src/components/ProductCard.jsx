@@ -45,7 +45,7 @@ export default class ProductCard extends Component {
 export default class ProductCard extends Component {
   render() {
     const { title, thumbnail, price, id } = this.props;
-    console.log(id);
+    // console.log(id);
     return (
       <div data-testid="product">
         <Link to={ `/product/${id}` } data-testid="product-detail-link">
