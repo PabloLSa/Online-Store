@@ -8,6 +8,8 @@ export default class Input extends Component {
       <input
         type="text"
         data-testid="query-input"
+        id="search"
+        name="search"
         value={ value }
         onChange={ onInputChange }
       />
