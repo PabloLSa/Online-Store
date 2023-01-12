@@ -24,6 +24,7 @@ export default class Home extends Component {
     const queryApi = await getProductsFromCategoryAndQuery('', search);
     this.setState({ apiResults: queryApi.results });
   };
+  // comentario
 
   render() {
     const { search, apiResults } = this.state;
