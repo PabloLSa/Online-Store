@@ -97,9 +97,6 @@ export default class Home extends Component {
           />
           {' '}
           <span data-testid="shopping-cart-size">{renderQty}</span>
-=======
-          <Button onSaveButton={ this.onSaveButton } testid="query-button" />
->>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
           <Input value={ search } onInputChange={ this.onInputChange } />
         </section>
 
