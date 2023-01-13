@@ -42,6 +42,7 @@ export default class ShoppingCart extends Component {
   };
 
   renderCards = (cart, pathname) => cart.map((prod, index) => (
+
     <ProductCard
       key={ prod.id + index }
       price={ prod.price }

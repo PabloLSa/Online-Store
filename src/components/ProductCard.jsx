@@ -44,10 +44,15 @@ export default class ProductCard extends Component {
 
 export default class ProductCard extends Component {
   render() {
-    const { title, thumbnail, price, id, qty } = this.props;
-    // console.log(id);
+    const { title, thumbnail, price, id, qty, addtocart } = this.props;
     return (
       <div data-testid="product">
+        {qty
+        && <Button
+          buttonText="X"
+          testid="remove-product"
+          onSaveButton={ () => addtocart('remove', id) }
+        />}
         <Link to={ `/product/${id}` } data-testid="product-detail-link">
           <img src={ thumbnail } alt="product" />
         </Link>
