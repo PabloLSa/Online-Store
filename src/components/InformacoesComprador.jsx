@@ -11,6 +11,7 @@ class InformacoesComprador extends Component {
             type="text"
             placeholder="Nome Completo"
             data-testid="checkout-fullname"
+            required
           />
         </label>
         <label htmlFor="cpf">
@@ -18,16 +19,18 @@ class InformacoesComprador extends Component {
             type="number"
             placeholder="CPF"
             data-testid="checkout-cpf"
+            required
           />
         </label>
         <label htmlFor="email">
-          <input type="text" placeholder="Email" data-testid="checkout-email" />
+          <input type="text" placeholder="Email" data-testid="checkout-email" required />
         </label>
         <label htmlFor="telefone">
           <input
             type="number"
             placeholder="Telefone"
             data-testid="checkout-phone"
+            required
           />
         </label>
         <label htmlFor="cep">
@@ -35,6 +38,7 @@ class InformacoesComprador extends Component {
             type="number"
             placeholder="CEP"
             data-testid="checkout-cep"
+            required
           />
         </label>
         <label htmlFor="endereço">
@@ -42,16 +46,17 @@ class InformacoesComprador extends Component {
             type="text"
             placeholder="Endereço"
             data-testid="checkout-address"
+            required
           />
         </label>
         <label htmlFor="complemento">
-          <input type="text" placeholder="Complemento" />
+          <input type="text" placeholder="Complemento" required />
         </label>
         <label htmlFor="número">
-          <input type="text" placeholder="Número" />
+          <input type="text" placeholder="Número" required />
         </label>
         <label htmlFor="cidade">
-          <input type="text" placeholder="Cidade" />
+          <input type="text" placeholder="Cidade" required />
         </label>
         <SelectEstade />
       </fieldset>

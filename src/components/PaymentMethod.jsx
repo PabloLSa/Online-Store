@@ -7,7 +7,7 @@ class PaymentMethod extends Component {
         <legend>Método de Pagmento</legend>
         <p>
           Boleto
-          <input name="payment" type="radio" data-testid="ticket-payment" />
+          <input name="payment" type="radio" data-testid="ticket-payment" required />
         </p>
         <p>
           Cartão de Cŕedito
