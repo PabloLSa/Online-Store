@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
+import localSet from '../services/localStorageFuncs';
 
 export default class Home extends Component {
   state = {
@@ -18,6 +19,7 @@ export default class Home extends Component {
 
   async componentDidMount() {
     const categories = await getCategories();
+    // const cart = JSON.parse(localStorage.getItem('cart'));
     this.setState({ categories });
   }
 
