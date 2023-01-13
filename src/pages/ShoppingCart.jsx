@@ -19,18 +19,19 @@ export default class ShoppingCart extends Component {
         key="id"
       >
         {
-          cart.map((product, index) => (
-            <ListedProduct
-              key={ product.id + index }
-              productName={ product.title }
-              productValue={ product.price }
-              productThumbnail={ product.thumbnail }
-              productQuantity={ 1 }
-            />
-          ))
+          cart
+            ? cart.map((product, index) => (
+              <ListedProduct
+                key={ product.id + index }
+                productName={ product.title }
+                productValue={ product.price }
+                productThumbnail={ product.thumbnail }
+                productQuantity={ 1 }
+              />
+            ))
+            : <span>Seu carrinho está vazio</span>
         }
 
-        Seu carrinho está vazio
       </div>
     );
   }

@@ -25,6 +25,8 @@ export default class Home extends Component {
     const { cart } = this.state;
     if (prevState.cart !== cart) {
       localStorage.setItem('cart', JSON.stringify(cart));
+      const cartStorage = JSON.parse(localStorage.getItem('cart'));
+      localStorage.setItem('quantity', JSON.stringify([...cartStorage]));
     }
   }
 
