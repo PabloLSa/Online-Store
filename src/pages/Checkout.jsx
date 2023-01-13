@@ -12,7 +12,7 @@ class Checkout extends Component {
   }
 
   produtosCarrinho = () => {
-    const produtos = JSON.parse(localStorage.getItem('cart'));
+    const produtos = JSON.parse(localStorage.getItem('cart')); // resumo dos produtos adicionados
     this.setState({
       produto: produtos,
     });
