@@ -4,36 +4,16 @@ import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default class ProductCard extends Component {
-  addToCartTwo = (product) => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.setState({ cart });
-  };
-
-  addToCart = (id) => {
-    const products = JSON.parse(localStorage.getItem('cart')) || [];
-    let filteredProducts = [];
-    const existsProduct = products?.some((prod) => prod.id === id);
-    if (existsProduct) {
-      filteredProducts = products.map((prod) => {
-        if (prod.id === id) {
-          return {
-            ...prod,
-            qty: prod.qty + 1,
-          };
-        }
-        return prod;
-      });
-    }
-    localStorage.setItem('cart', JSON.stringify(filteredProducts));
-  };
-
   render() {
-    const { title, thumbnail, price, id, qty } = this.props;
+    const { title, thumbnail, price, id, qty, addtocart } = this.props;
     return (
       <div data-testid="product">
-        {qty && <Button buttonText="X" testid="remove-product" />}
+        {qty
+        && <Button
+          buttonText="X"
+          testid="remove-product"
+          onSaveButton={ () => addtocart('remove', id) }
+        />}
         <Link to={ `/product/${id}` } data-testid="product-detail-link">
           <img src={ thumbnail } alt="product" />
         </Link>
@@ -44,12 +24,13 @@ export default class ProductCard extends Component {
               condition
               buttonText="+"
               testid="product-increase-quantity"
-              onSaveButton={ () => this.addToCart(id) }
+              onSaveButton={ () => addtocart(true, id) }
             />
             <p data-testid="shopping-cart-product-quantity">{qty}</p>
             <Button
               buttonText="-"
               testid="product-decrease-quantity"
+              onSaveButton={ () => addtocart(false, id) }
             />
           </div>
         )}
@@ -65,4 +46,5 @@ ProductCard.propTypes = {
   title: PropTypes.string,
   id: PropTypes.string,
   qty: PropTypes.number,
+  addtocart: PropTypes.func,
 }.isRequired;

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 
 export default class Button extends Component {
   render() {
-    const { onSaveButton, testid, buttonText, children, condition } = this.props;
+    const { onSaveButton, testid, buttonText, children } = this.props;
     return (
       <button
-        type={ !condition ? 'button' : 'submit' }
+        type="button"
         onClick={ onSaveButton }
         data-testid={ testid }
       >
@@ -22,5 +22,4 @@ Button.propTypes = {
   testid: PropTypes.string,
   children: PropTypes.string,
   buttonText: PropTypes.string,
-  condition: PropTypes.bool,
 }.isRequired;

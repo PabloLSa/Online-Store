@@ -6,7 +6,6 @@ import Input from '../components/Input';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
-import localSet from '../services/localStorageFuncs';
 
 export default class Home extends Component {
   state = {
