@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+// import { nanoid } from 'nanoid';
 import ProductCard from '../components/ProductCard';
-import ListedProduct from '../components/ListedProduct';
+// import ListedProduct from '../components/ListedProduct';
 
 export default class ShoppingCart extends Component {
   state = {
@@ -9,24 +10,48 @@ export default class ShoppingCart extends Component {
 
   componentDidMount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    // console.log(cart);
     this.setState({ cart });
   }
 
-  renderCards = (cart) => cart.map((prod) => (
+  addToCart = (boll, id) => {
+    // Pega os itens do localStorage
+    let products = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // verifica se o id passado pelo click é igual ao item dentro do local storage
+    const existsProduct = products.find((prod) => prod.id === id);
+
+    // caso o parametro da função for igual a remove o item é removido claramente
+    if (boll === 'remove') {
+      products = products.filter((prod) => prod.id !== id);
+    }
+
+    // lógica que define o aumento da quantidade de itens iguais no inventario
+    if (boll) {
+      existsProduct.qty += 1;
+    } else if (existsProduct.qty > 1) {
+      existsProduct.qty -= 1;
+    }
+
+    // por fim a lógica pra definir o estado que faz a página ser atualizada e renderizar o valor atualizado, abaixo o valor sendo definido novament eno localStorage
+    this.setState({ cart: products });
+    localStorage.setItem('cart', JSON.stringify(products));
+  };
+
+  renderCards = (cart) => cart.map((prod, index) => (
     <ProductCard
-      key={ prod.id }
+      key={ prod.id + index }
       price={ prod.price }
       title={ prod.title }
       thumbnail={ prod.thumbnail }
       id={ prod.id }
       qty={ prod.qty }
+      addtocart={ this.addToCart }
     />
   ));
 
   render() {
-
     const { cart } = this.state;
+
     return cart?.length
       ? this.renderCards(cart)
       : (
@@ -34,9 +59,7 @@ export default class ShoppingCart extends Component {
           data-testid="shopping-cart-empty-message"
         >
           Seu carrinho está vazio
-
         </div>
       );
-
   }
 }

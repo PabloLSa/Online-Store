@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 export default class Button extends Component {
   render() {
-    const { onSaveButton, testid, children } = this.props;
+    const { onSaveButton, testid, buttonText, children } = this.props;
     return (
       <button
         type="button"
         onClick={ onSaveButton }
         data-testid={ testid }
       >
-        {children}
+        { children }
         { buttonText }
       </button>
     );
