@@ -13,11 +13,19 @@ export default class Home extends Component {
     filtro: '',
     apiResults: [],
     categories: [],
+    cart: [],
   };
 
   async componentDidMount() {
     const categories = await getCategories();
     this.setState({ categories });
+  }
+
+  componentDidUpdate(prevState) {
+    const { cart } = this.state;
+    if (prevState.cart !== cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
   }
 
   // Função criada pra passar a logica do value dos inputes pro estado, assim pode ser utilizada no envio da props pro documento e no para renderização
@@ -38,6 +46,14 @@ export default class Home extends Component {
     this.setState({ apiResults: queryApi.results });
   };
 
+  addToCart = (product) => {
+    this.setState((prevState) => {
+      const { cart } = prevState;
+      cart.push(product);
+      return { cart };
+    });
+  };
+
   render() {
     const { search, apiResults, categories } = this.state;
     return (
@@ -50,7 +66,11 @@ export default class Home extends Component {
          )}
 
         <section>
-          <Button onSaveButton={ this.onSaveButton } testid="query-button" />
+          <Button
+            buttonText="Buscar"
+            onSaveButton={ this.onSaveButton }
+            testid="query-button"
+          />
           <Input value={ search } onInputChange={ this.onInputChange } />
         </section>
 
@@ -66,6 +86,20 @@ export default class Home extends Component {
         <Link to="/shoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
 
         {apiResults.length > 0 ? (
+
+          apiResults.map((item) => (
+            <div key={ item.id } data-testid="product">
+              <p>{item.title}</p>
+              <button
+                type="button"
+                data-testid="product-add-to-cart"
+                onClick={ () => this.addToCart(item) }
+              >
+                Adicionar ao carrinho
+
+              </button>
+            </div>
+
           apiResults.map(({ id, title, price, thumbnail }) => (
             <ProductCard
               key={ id }
@@ -74,6 +108,7 @@ export default class Home extends Component {
               thumbnail={ thumbnail }
               id={ id }
             />
+
           ))
         ) : (
           <span>Nenhum produto foi encontrado</span>

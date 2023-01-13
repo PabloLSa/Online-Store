@@ -13,7 +13,7 @@ export default class ProductCard extends Component {
         </Link>
         <h4 data-testid="shopping-cart-product-name">{title}</h4>
         {qty && <p data-testid="shopping-cart-product-quantity">{qty}</p>}
-        <p>{price}</p>
+        <p>{`R$${price}`}</p>
       </div>
     );
   }

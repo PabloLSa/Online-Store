@@ -11,6 +11,7 @@ export default class Button extends Component {
         data-testid={ testid }
       >
         {children}
+        { buttonText }
       </button>
     );
   }
@@ -20,4 +21,5 @@ Button.propTypes = {
   onSaveButton: PropTypes.func,
   testid: PropTypes.string,
   children: PropTypes.string,
+  buttonText: PropTypes.string,
 }.isRequired;

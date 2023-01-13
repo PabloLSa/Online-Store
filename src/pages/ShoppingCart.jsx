@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProductCard from '../components/ProductCard';
+import ListedProduct from '../components/ListedProduct';
 
 export default class ShoppingCart extends Component {
   state = {
@@ -24,6 +25,7 @@ export default class ShoppingCart extends Component {
   ));
 
   render() {
+
     const { cart } = this.state;
     return cart?.length
       ? this.renderCards(cart)
@@ -35,5 +37,6 @@ export default class ShoppingCart extends Component {
 
         </div>
       );
+
   }
 }
