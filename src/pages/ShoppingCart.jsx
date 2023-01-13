@@ -55,17 +55,14 @@ export default class ShoppingCart extends Component {
   ));
 
   render() {
-    const { cart, pathname } = this.state;
+    return (
+      <div
+        data-testid="shopping-cart-empty-message"
+      >
+        Seu carrinho está vazio
 
-    return cart?.length
-      ? this.renderCards(cart, pathname)
-      : (
-        <div
-          data-testid="shopping-cart-empty-message"
-        >
-          Seu carrinho está vazio
-        </div>
-      );
+      </div>
+    );
   }
 }
 ShoppingCart.propTypes = {
