@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { SelectEstade } from './SelectEstade';
 
-class BuyerInformation extends Component {
-  handleChange = (target) => {
-
-  }; // componnte das informações do comprador
-
+class InformacoesComprador extends Component {
   render() {
     return (
       <fieldset>
@@ -25,11 +21,7 @@ class BuyerInformation extends Component {
           />
         </label>
         <label htmlFor="email">
-          <input
-            type="text"
-            placeholder="Email"
-            data-testid="checkout-email"
-          />
+          <input type="text" placeholder="Email" data-testid="checkout-email" />
         </label>
         <label htmlFor="telefone">
           <input
@@ -53,22 +45,13 @@ class BuyerInformation extends Component {
           />
         </label>
         <label htmlFor="complemento">
-          <input
-            type="text"
-            placeholder="Complemento"
-          />
+          <input type="text" placeholder="Complemento" />
         </label>
         <label htmlFor="número">
-          <input
-            type="text"
-            placeholder="Número"
-          />
+          <input type="text" placeholder="Número" />
         </label>
         <label htmlFor="cidade">
-          <input
-            type="text"
-            placeholder="Cidade"
-          />
+          <input type="text" placeholder="Cidade" />
         </label>
         <SelectEstade />
       </fieldset>
@@ -76,4 +59,4 @@ class BuyerInformation extends Component {
   }
 }
 
-export default BuyerInformation;
+export default InformacoesComprador;
