@@ -20,6 +20,7 @@ import { getProductById } from '../services/api';
 
 export default class Product extends Component {
   state = {
+    id: '',
     title: '',
     price: '',
     thumbnail: '',
@@ -81,8 +82,28 @@ export default class Product extends Component {
     const { title, price, thumbnail, renderQty } = this.state;
 =======
     const { title, price, thumbnail } = await getProductById(id);
-    console.log(title, price, thumbnail);
-    this.setState({ title, price, thumbnail });
+    // console.log(data);
+    this.setState({ title, price, thumbnail, id });
+  };
+
+  addToCart = (id, title, price, thumbnail) => {
+    const products = JSON.parse(localStorage.getItem('cart')) || [];
+    let filteredProducts = [];
+    const existsProduct = products?.some((prod) => prod.id === id);
+    if (!existsProduct) {
+      filteredProducts = [...products, { id, title, price, thumbnail, qty: 1 }];
+    } else {
+      filteredProducts = products.map((prod) => {
+        if (prod.id === id) {
+          return {
+            ...prod,
+            qty: prod.qty + 1,
+          };
+        }
+        return prod;
+      });
+    }
+    localStorage.setItem('cart', JSON.stringify(filteredProducts));
   };
 
   render() {
