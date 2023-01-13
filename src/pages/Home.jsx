@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import Input from '../components/Input';
 import ProductCard from '../components/ProductCard';
+import Input from '../components/Input';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
@@ -13,7 +13,7 @@ export default class Home extends Component {
     filtro: '',
     apiResults: [],
     categories: [],
-    cart: [],
+    // cart: [],
   };
 
   async componentDidMount() {
@@ -21,14 +21,14 @@ export default class Home extends Component {
     this.setState({ categories });
   }
 
-  componentDidUpdate(prevState) {
-    const { cart } = this.state;
-    if (prevState.cart !== cart) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-      const cartStorage = JSON.parse(localStorage.getItem('cart'));
-      localStorage.setItem('quantity', JSON.stringify([...cartStorage]));
-    }
-  }
+  // componentDidUpdate(prevState) {
+  //   const { cart } = this.state;
+  //   if (prevState.cart !== cart) {
+  //     localStorage.setItem('cart', JSON.stringify(cart));
+  //     const cartStorage = JSON.parse(localStorage.getItem('cart'));
+  //     localStorage.setItem('quantity', JSON.stringify([...cartStorage]));
+  //   }
+  // }
 
   // Função criada pra passar a logica do value dos inputes pro estado, assim pode ser utilizada no envio da props pro documento e no para renderização
   onInputChange = ({ target: { name, value } }) => {
@@ -48,12 +48,24 @@ export default class Home extends Component {
     this.setState({ apiResults: queryApi.results });
   };
 
-  addToCart = (product) => {
-    this.setState((prevState) => {
-      const { cart } = prevState;
-      cart.push(product);
-      return { cart };
-    });
+  addToCart = (id, title, price, thumbnail) => {
+    const products = JSON.parse(localStorage.getItem('cart')) || [];
+    let filteredProducts = [];
+    const existsProduct = products?.some((prod) => prod.id === id);
+    if (!existsProduct) {
+      filteredProducts = [...products, { id, title, price, thumbnail, qty: 1 }];
+    } else {
+      filteredProducts = products.map((prod) => {
+        if (prod.id === id) {
+          return {
+            ...prod,
+            qty: prod.qty + 1,
+          };
+        }
+        return prod;
+      });
+    }
+    localStorage.setItem('cart', JSON.stringify(filteredProducts));
   };
 
   render() {
@@ -100,7 +112,8 @@ export default class Home extends Component {
                 <button
                   type="button"
                   data-testid="product-add-to-cart"
-                  onClick={ () => this.addToCart(item) }
+                  onClick={ () => this
+                    .addToCart(item.id, item.title, item.price, item.thumbnail) }
                 >
                   Adicionar ao carrinho
                 </button>

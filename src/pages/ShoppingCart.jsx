@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import ListedProduct from '../components/ListedProduct';
+// import { nanoid } from 'nanoid';
+import ProductCard from '../components/ProductCard';
+// import ListedProduct from '../components/ListedProduct';
 
 export default class ShoppingCart extends Component {
   state = {
@@ -7,32 +9,33 @@ export default class ShoppingCart extends Component {
   };
 
   componentDidMount() {
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // console.log(cart);
     this.setState({ cart });
   }
 
+  renderCards = (cart) => cart.map((prod, index) => (
+    <ProductCard
+      key={ prod.id + index }
+      price={ prod.price }
+      title={ prod.title }
+      thumbnail={ prod.thumbnail }
+      id={ prod.id }
+      qty={ prod.qty }
+    />
+  ));
+
   render() {
     const { cart } = this.state;
-    return (
-      <div
-        data-testid="shopping-cart-empty-message"
-        key="id"
-      >
-        {
-          cart
-            ? cart.map((product, index) => (
-              <ListedProduct
-                key={ product.id + index }
-                productName={ product.title }
-                productValue={ product.price }
-                productThumbnail={ product.thumbnail }
-                productQuantity={ 1 }
-              />
-            ))
-            : <span>Seu carrinho está vazio</span>
-        }
 
-      </div>
-    );
+    return cart?.length
+      ? this.renderCards(cart)
+      : (
+        <div
+          data-testid="shopping-cart-empty-message"
+        >
+          Seu carrinho está vazio
+        </div>
+      );
   }
 }
