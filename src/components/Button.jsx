@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 export default class Button extends Component {
   render() {
-    const { onSaveButton, testid } = this.props;
+    const { onSaveButton, testid, children } = this.props;
     return (
       <button
         type="button"
         onClick={ onSaveButton }
         data-testid={ testid }
       >
-        Buscar
+        {children}
       </button>
     );
   }
@@ -19,4 +19,5 @@ export default class Button extends Component {
 Button.propTypes = {
   onSaveButton: PropTypes.func,
   testid: PropTypes.string,
+  children: PropTypes.string,
 }.isRequired;
