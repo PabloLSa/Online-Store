@@ -17,6 +17,7 @@ export default class Product extends Component {
 =======
 import Button from '../components/Button';
 import { getProductById } from '../services/api';
+import sumQty from '../services/helpers';
 
 export default class Product extends Component {
   state = {
@@ -86,7 +87,7 @@ export default class Product extends Component {
     this.setState({ title, price, thumbnail, id });
   };
 
-  addToCart = (id, title, price, thumbnail) => {
+  addToCart = async (id, title, price, thumbnail) => {
     const products = JSON.parse(localStorage.getItem('cart')) || [];
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
@@ -103,6 +104,10 @@ export default class Product extends Component {
         return prod;
       });
     }
+    const sum = sumQty();
+    this.setState({
+      renderQty: sum,
+    });
     localStorage.setItem('cart', JSON.stringify(filteredProducts));
   };
 

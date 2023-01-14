@@ -21,7 +21,6 @@ export default class Home extends Component {
 
   async componentDidMount() {
     const categories = await getCategories();
-    // const cart = JSON.parse(localStorage.getItem('cart'));
     this.setState({ categories });
 
     const sum = await sumQty();
@@ -90,7 +89,7 @@ export default class Home extends Component {
          )}
 
         <section>
-<<<<<<< HEAD
+
           <Button
             buttonText="Buscar"
             onSaveButton={ this.onSaveButton }
