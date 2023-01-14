@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import { getProductById } from '../services/api';
+import sumQty from '../services/helpers';
 
 export default class Product extends Component {
   state = {
@@ -10,10 +11,15 @@ export default class Product extends Component {
     title: '',
     price: '',
     thumbnail: '',
+    renderQty: 0,
   };
 
   async componentDidMount() {
     await this.getProducts();
+    const sum = await sumQty();
+    this.setState({
+      renderQty: sum,
+    });
   }
 
   getProducts = async () => {
@@ -24,7 +30,7 @@ export default class Product extends Component {
     this.setState({ title, price, thumbnail, id });
   };
 
-  addToCart = (id, title, price, thumbnail) => {
+  addToCart = async (id, title, price, thumbnail) => {
     const products = JSON.parse(localStorage.getItem('cart')) || [];
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
@@ -41,11 +47,15 @@ export default class Product extends Component {
         return prod;
       });
     }
+    const sum = sumQty();
+    this.setState({
+      renderQty: sum,
+    });
     localStorage.setItem('cart', JSON.stringify(filteredProducts));
   };
 
   render() {
-    const { id, title, price, thumbnail } = this.state;
+    const { id, title, price, thumbnail, renderQty } = this.state;
     return (
       <div>
         <section>
@@ -61,6 +71,8 @@ export default class Product extends Component {
           onSaveButton={ () => this.addToCart(id, title, price, thumbnail) }
         >
           Adicionar ao carrinho
+          {' '}
+          <span data-testid="shopping-cart-size">{renderQty}</span>
         </Button>
         <Link to="/shoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
       </div>

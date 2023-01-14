@@ -34,7 +34,7 @@ export default class ProductCard extends Component {
             />
           </div>
         )}
-        <p>{`R$${price * qty}`}</p>
+        <p>{qty ? `R$${price * qty}` : `R$${price}`}</p>
       </div>
     );
   }

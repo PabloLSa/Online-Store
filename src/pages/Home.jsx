@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
+import sumQty from '../services/helpers';
 
 export default class Home extends Component {
   state = {
@@ -13,22 +14,19 @@ export default class Home extends Component {
     filtro: '',
     apiResults: [],
     categories: [],
-    // cart: [],
+    renderQty: 0,
   };
 
   async componentDidMount() {
     const categories = await getCategories();
-    // const cart = JSON.parse(localStorage.getItem('cart'));
     this.setState({ categories });
+
+    const sum = await sumQty();
+    this.setState({ renderQty: sum });
   }
 
-  // componentDidUpdate(prevState) {
-  //   const { cart } = this.state;
-  //   if (prevState.cart !== cart) {
-  //     localStorage.setItem('cart', JSON.stringify(cart));
-  //     const cartStorage = JSON.parse(localStorage.getItem('cart'));
-  //     localStorage.setItem('quantity', JSON.stringify([...cartStorage]));
-  //   }
+  // shouldComponentUpdate(_nextProps, nextState) {
+  //   this.setState({ renderQty: ne})
   // }
 
   // Função criada pra passar a logica do value dos inputes pro estado, assim pode ser utilizada no envio da props pro documento e no para renderização
@@ -49,7 +47,7 @@ export default class Home extends Component {
     this.setState({ apiResults: queryApi.results });
   };
 
-  addToCart = (id, title, price, thumbnail) => {
+  addToCart = async (id, title, price, thumbnail) => {
     const products = JSON.parse(localStorage.getItem('cart')) || [];
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
@@ -66,11 +64,13 @@ export default class Home extends Component {
         return prod;
       });
     }
+    const sum = sumQty();
+    this.setState({ renderQty: sum + 1 });
     localStorage.setItem('cart', JSON.stringify(filteredProducts));
   };
 
   render() {
-    const { search, apiResults, categories } = this.state;
+    const { search, apiResults, categories, renderQty } = this.state;
     return (
       <div>
         {apiResults.length < 1
@@ -86,6 +86,8 @@ export default class Home extends Component {
             onSaveButton={ this.onSaveButton }
             testid="query-button"
           />
+          {' '}
+          <span data-testid="shopping-cart-size">{renderQty}</span>
           <Input value={ search } onInputChange={ this.onInputChange } />
         </section>
 
