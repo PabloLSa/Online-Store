@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SelectEstade from './SelectEstade';
+import { SelectEstade } from './SelectEstade';
 
-class InformacoesComprador extends Component {
+class BuyerInformation extends Component { // componnte das informações do comprador
   render() {
     return (
       <fieldset>
@@ -59,4 +59,4 @@ class InformacoesComprador extends Component {
   }
 }
 
-export default InformacoesComprador;
+export default BuyerInformation;
