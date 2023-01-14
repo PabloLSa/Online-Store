@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
-import InformacoesComprador from '../components/InformacoesComprador';
+import BuyerInformation from '../components/BuyerInformation';
 import PaymentMethod from '../components/PaymentMethod';
 
 class Checkout extends Component {
+  state = {
+    produto: [],
+  };
+
+  componentDidMount() {
+    this.produtosCarrinho();
+  }
+
+  produtosCarrinho = () => {
+    const produtos = JSON.parse(localStorage.getItem('cart'));
+    this.setState({
+      produto: produtos,
+    });
+  };
+
   render() {
+    const { produto } = this.state;
     return (
       <>
-        <InformacoesComprador />
+        <BuyerInformation />
         <PaymentMethod />
         <button type="submit" data-testid="checkout-btn">Comprar</button>
+        { produto.map((prod) => (
+          <p key={ prod.title }>
+            { prod.title }
+          </p>
+        )) }
 
       </>
     );

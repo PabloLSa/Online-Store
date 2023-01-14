@@ -57,8 +57,12 @@ export default class ShoppingCart extends Component {
   render() {
     const { cart } = this.state;
     return cart?.length
-      ? this.renderCards(cart)
-      : (
+      ? (
+        <div>
+          { this.renderCards(cart) }
+          <Link to="/checkout" data-testid="checkout-products">Finalizar a Compra</Link>
+        </div>
+      ) : (
         <div
           data-testid="shopping-cart-empty-message"
         >

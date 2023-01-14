@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectEstade extends Component {
+class SelectEstade extends Component { // crianndo option do estado de endereço do comprador
   state = {
     estado: [],
   };
