@@ -132,6 +132,9 @@ export default class Home extends Component {
             ))
             : (<span>Nenhum produto foi encontrado</span>)
         }
+            ))
+            : (<span>Nenhum produto foi encontrado</span>)
+        }
 
       </div>
     );

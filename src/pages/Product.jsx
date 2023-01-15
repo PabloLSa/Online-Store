@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import { getProductById } from '../services/api';
+import Evaluation from '../components/Evaluation';
 import sumQty from '../services/helpers';
 
 export default class Product extends Component {
@@ -11,19 +12,25 @@ export default class Product extends Component {
     title: '',
     price: '',
     thumbnail: '',
+    email: '',
+    rating: '',
+    text: '',
+    invalidtSubmit: false,
+    evaluation: [],
     available: 0,
     renderQty: 0,
   };
 
   async componentDidMount() {
-    await this.getProducts();
+    await this.products();
+    this.Evaluations();
     const sum = await sumQty();
     this.setState({
       renderQty: sum,
     });
   }
 
-  getProducts = async () => {
+  products = async () => {
     const { match: { params: { id } } } = this.props;
 
     const { title, price, thumbnail,
@@ -38,10 +45,17 @@ export default class Product extends Component {
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
     if (!existsProduct) {
+     
       filteredProducts = [...products, { id,
         title,
+     
         price,
+     
         thumbnail,
+      email: '',
+      rating: 0,
+      invalidtSubmit: false,
+   ,
         qty: 1,
         available }];
     } else {
@@ -62,8 +76,66 @@ export default class Product extends Component {
     localStorage.setItem('cart', JSON.stringify(filteredProducts));
   };
 
+  Evaluations = () => {
+    const { match: { params: { id } } } = this.props;
+    const evaluation = JSON.parse(localStorage.getItem(id));
+    if (evaluation) {
+      this.setState({
+        evaluation,
+      });
+    } else {
+      this.setState({
+        evaluation: [],
+      });
+    }
+  };
+
+  handleFields = ({ target }) => {
+    this.setState({
+      [target.name]: target.value,
+    });
+  };
+
+  handleButton = (event) => {
+    event.preventDefault();
+    const { match: { params: { id } } } = this.props;
+    const { email, rating, text } = this.state;
+    if (email.includes('@') && rating !== 0) {
+      const currentAvaliation = [{
+        email,
+        text,
+        rating,
+      }];
+      this.setState((prevState) => ({
+        invalidtSubmit: false,
+        evaluation: prevState + currentAvaliation,
+      }));
+      const evaluation = JSON.parse(localStorage.getItem(id));
+      if (evaluation) {
+        evaluation.push(currentAvaliation[0]);
+        localStorage.setItem(id, JSON.stringify(evaluation));
+        this.setState({
+          email: '',
+          text: '',
+        });
+      } else {
+        localStorage.setItem(id, JSON.stringify(currentAvaliation));
+        this.setState({
+          email: '',
+          text: '',
+        });
+      }
+    } else {
+      this.setState({
+        invalidtSubmit: true,
+      });
+    }
+    this.Evaluations();
+  };
+
   render() {
-    const { title, price, thumbnail, renderQty } = this.state;
+    const { title, price, thumbnail, email, text,
+      invalidtSubmit, evaluation, renderQty } = this.state;
     return (
       <div>
         <section>
@@ -83,6 +155,30 @@ export default class Product extends Component {
           <span data-testid="shopping-cart-size">{renderQty}</span>
         </Button>
         <Link to="/shoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Evaluation
+          handleFields={ this.handleFields }
+          email={ email }
+          text={ text }
+          handleButton={ this.handleButton }
+          invalidtSubmit={ invalidtSubmit }
+        />
+        <h1>Avaliações:</h1>
+        {(evaluation.length < 1) ? <p>Nenhuma avaliação foi encontrada</p>
+          : (
+            evaluation.map((eva, index) => (
+              <div key={ index }>
+                <h2 data-testid="review-card-rating">
+                  { `${eva.rating} Estrelas` }
+                </h2>
+                <h4 data-testid="review-card-email">
+                  { eva.email }
+                </h4>
+                <span data-testid="review-card-evaluation">
+                  { eva.text }
+                </span>
+                <hr />
+              </div>
+            )))}
       </div>
     );
   }
