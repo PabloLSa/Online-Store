@@ -11,6 +11,7 @@ export default class Product extends Component {
     title: '',
     price: '',
     thumbnail: '',
+    available: 0,
     renderQty: 0,
   };
 
@@ -25,29 +26,36 @@ export default class Product extends Component {
   getProducts = async () => {
     const { match: { params: { id } } } = this.props;
 
-    const { title, price, thumbnail } = await getProductById(id);
-    // console.log(data);
-    this.setState({ title, price, thumbnail, id });
+    const { title, price, thumbnail,
+      available_quantity: available } = await getProductById(id);
+
+    this.setState({ title, price, thumbnail, id, available });
   };
 
-  addToCart = async (id, title, price, thumbnail) => {
+  addToCart = async (params) => {
+    const { id, title, price, thumbnail, available } = params;
     const products = JSON.parse(localStorage.getItem('cart')) || [];
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
     if (!existsProduct) {
-      filteredProducts = [...products, { id, title, price, thumbnail, qty: 1 }];
+      filteredProducts = [...products, { id,
+        title,
+        price,
+        thumbnail,
+        qty: 1,
+        available }];
     } else {
       filteredProducts = products.map((prod) => {
         if (prod.id === id) {
           return {
             ...prod,
-            qty: prod.qty + 1,
+            qty: prod.qty < available ? prod.qty + 1 : available,
           };
         }
         return prod;
       });
     }
-    const sum = sumQty();
+    const sum = sumQty(); // MLB1776349821
     this.setState({
       renderQty: sum,
     });
@@ -55,7 +63,7 @@ export default class Product extends Component {
   };
 
   render() {
-    const { id, title, price, thumbnail, renderQty } = this.state;
+    const { title, price, thumbnail, renderQty } = this.state;
     return (
       <div>
         <section>
@@ -68,7 +76,7 @@ export default class Product extends Component {
         <Button testid="shopping-cart-buttons">Buscar</Button>
         <Button
           testid="product-detail-add-to-cart"
-          onSaveButton={ () => this.addToCart(id, title, price, thumbnail) }
+          onSaveButton={ () => this.addToCart(this.state) }
         >
           Adicionar ao carrinho
           {' '}
