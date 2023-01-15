@@ -5,7 +5,9 @@ import Button from './Button';
 
 export default class ProductCard extends Component {
   render() {
-    const { title, thumbnail, price, id, qty, addtocart, pathname } = this.props;
+    const { title, thumbnail, price, id,
+      qty, addtocart, pathname, shipping: { free_shipping: freeshipping } } = this.props;
+    console.log(freeshipping);
     return (
       <div data-testid="product">
         {pathname
@@ -17,7 +19,10 @@ export default class ProductCard extends Component {
         <Link to={ `/product/${id}` } data-testid="product-detail-link">
           <img src={ thumbnail } alt="product" />
         </Link>
-        <h4 data-testid="shopping-cart-product-name">{title}</h4>
+        <h4 data-testid="shopping-cart-product-name">
+          {title}
+        </h4>
+        {freeshipping && <span data-testid="free-shipping">frete gratis</span>}
         {pathname && (
           <div>
             <Button
@@ -46,5 +51,6 @@ ProductCard.propTypes = {
   title: PropTypes.string,
   id: PropTypes.string,
   qty: PropTypes.number,
+  shipping: PropTypes.bool,
   addtocart: PropTypes.func,
 }.isRequired;
