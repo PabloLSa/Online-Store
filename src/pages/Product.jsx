@@ -21,7 +21,6 @@ export default class Product extends Component {
     this.setState({
       renderQty: sum,
     });
-
   }
 
   getProducts = async () => {

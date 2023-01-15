@@ -14,11 +14,6 @@ function App() {
         <Route exact path="/shoppingCart" component={ ShoppingCart } />
         <Route path="/product/:id" component={ Product } />
         <Route exact path="/Checkout" component={ Checkout } />
-        <Route path="/product/:id" component={ Product } />
-<<<<<<< HEAD
-        <Route exact path="/checkout" component={ Checkout } />
-=======
->>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
       </Switch>
     </div>
   );

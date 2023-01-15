@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 // import { nanoid } from 'nanoid';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-// import ListedProduct from '../components/ListedProduct';
 
 export default class ShoppingCart extends Component {
   state = {
     cart: [],
+    pathname: '',
   };
 
   componentDidMount() {
@@ -56,11 +57,11 @@ export default class ShoppingCart extends Component {
   ));
 
   render() {
-    const { cart } = this.state;
+    const { cart, pathname } = this.state;
     return cart?.length
       ? (
         <div>
-          { this.renderCards(cart) }
+          { this.renderCards(cart, pathname) }
           <Link to="/checkout" data-testid="checkout-products">Finalizar a Compra</Link>
         </div>
       ) : (
