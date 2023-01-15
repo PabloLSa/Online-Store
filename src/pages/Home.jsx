@@ -117,6 +117,7 @@ export default class Home extends Component {
                   price={ item.price }
                   thumbnail={ item.thumbnail }
                   id={ item.id }
+                  shipping={ item.shipping }
                 />
                 <button
                   type="button"
