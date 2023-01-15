@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
 // import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import ProductCard from '../components/ProductCard';
@@ -74,7 +75,7 @@ export default class ShoppingCart extends Component {
   }
 }
 ShoppingCart.propTypes = {
-  location: PropTypes.shape = {
-    pathname: PropTypes.string,
+  location: Proptypes.shape = {
+    pathname: Proptypes.string,
   },
 }.isRequired;

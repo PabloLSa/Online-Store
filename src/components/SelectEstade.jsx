@@ -17,7 +17,7 @@ export default class SelectEstade extends Component { // crianndo option do esta
     const { estado } = this.state;
     return (
       <select onClick={ this.criandoEstado }>
-        <option value="id" disabled selected>Estado</option>
+        <option value="id">Estado</option>
         {
           estado.map((state) => (
             <option value={ state.sigla } key={ state.sigla }>
