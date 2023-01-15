@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
 // import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-// import ListedProduct from '../components/ListedProduct';
 
 export default class ShoppingCart extends Component {
   state = {
     cart: [],
+    pathname: '',
   };
 
   componentDidMount() {
@@ -42,6 +43,7 @@ export default class ShoppingCart extends Component {
   };
 
   renderCards = (cart, pathname) => cart.map((prod, index) => (
+
     <ProductCard
       key={ prod.id + index }
       price={ prod.price }
@@ -56,20 +58,23 @@ export default class ShoppingCart extends Component {
 
   render() {
     const { cart, pathname } = this.state;
-
     return cart?.length
-      ? this.renderCards(cart, pathname)
-      : (
-        <div
+      ? (
+        <div>
+          { this.renderCards(cart, pathname) }
+          <Link to="/checkout" data-testid="checkout-products">Finalizar a Compra</Link>
+        </div>
+      ) : (
+        <span
           data-testid="shopping-cart-empty-message"
         >
           Seu carrinho está vazio
-        </div>
+        </span>
       );
   }
 }
 ShoppingCart.propTypes = {
-  location: PropTypes.shape = {
-    pathname: PropTypes.string,
+  location: Proptypes.shape = {
+    pathname: Proptypes.string,
   },
 }.isRequired;

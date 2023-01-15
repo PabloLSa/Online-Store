@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import ProductCard from '../components/ProductCard';
 import Input from '../components/Input';
+import ProductCard from '../components/ProductCard';
 import RadioButon from '../components/RadioButon';
 import { getCategories, getCategoryId,
   getProductsFromCategoryAndQuery } from '../services/api';
@@ -87,6 +87,7 @@ export default class Home extends Component {
          )}
 
         <section>
+
           <Button
             buttonText="Buscar"
             onSaveButton={ this.onSaveButton }
