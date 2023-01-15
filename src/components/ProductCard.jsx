@@ -5,10 +5,10 @@ import Button from './Button';
 
 export default class ProductCard extends Component {
   render() {
-    const { title, thumbnail, price, id, qty, addtocart } = this.props;
+    const { title, thumbnail, price, id, qty, addtocart, pathname } = this.props;
     return (
       <div data-testid="product">
-        {qty
+        {pathname
         && <Button
           buttonText="X"
           testid="remove-product"
@@ -18,7 +18,7 @@ export default class ProductCard extends Component {
           <img src={ thumbnail } alt="product" />
         </Link>
         <h4 data-testid="shopping-cart-product-name">{title}</h4>
-        {qty && (
+        {pathname && (
           <div>
             <Button
               condition
@@ -34,7 +34,7 @@ export default class ProductCard extends Component {
             />
           </div>
         )}
-        <p>{qty ? `R$${price * qty}` : `R$${price}`}</p>
+        <p>{pathname ? `R$${price * qty}` : `R$${price}`}</p>
       </div>
     );
   }

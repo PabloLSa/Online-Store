@@ -47,12 +47,18 @@ export default class Home extends Component {
     this.setState({ apiResults: queryApi.results });
   };
 
-  addToCart = async (id, title, price, thumbnail) => {
+  addToCart = async (item) => {
+    const { id, title, price, thumbnail, available_quantity: available } = item;
     const products = JSON.parse(localStorage.getItem('cart')) || [];
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
     if (!existsProduct) {
-      filteredProducts = [...products, { id, title, price, thumbnail, qty: 1 }];
+      filteredProducts = [...products, { id,
+        title,
+        price,
+        thumbnail,
+        qty: 1,
+        available }];
     } else {
       filteredProducts = products.map((prod) => {
         if (prod.id === id) {
@@ -115,8 +121,7 @@ export default class Home extends Component {
                 <button
                   type="button"
                   data-testid="product-add-to-cart"
-                  onClick={ () => this
-                    .addToCart(item.id, item.title, item.price, item.thumbnail) }
+                  onClick={ () => this.addToCart(item) }
                 >
                   Adicionar ao carrinho
                 </button>
