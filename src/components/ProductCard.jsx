@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Button from './Button';
 
 export default class ProductCard extends Component {
@@ -41,28 +39,6 @@ export default class ProductCard extends Component {
           </div>
         )}
         <p>{pathname ? `R$${price * qty}` : `R$${price}`}</p>
-=======
-=======
-import Button from './Button';
->>>>>>> 877227b (fix errors)
-
-export default class ProductCard extends Component {
-  render() {
-    const { title, thumbnail, price, id, qty, addtocart } = this.props;
-    return (
-      <div data-testid="product">
-        {qty
-        && <Button
-          buttonText="X"
-          testid="remove-product"
-          onSaveButton={ () => addtocart('remove', id) }
-        />}
-        <Link to={ `/product/${id}` } data-testid="product-detail-link">
-          <img src={ thumbnail } alt="product" />
-        </Link>
-        <h4>{title}</h4>
-        <p>{price}</p>
->>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
       </div>
     );
   }
@@ -73,10 +49,7 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string,
   title: PropTypes.string,
   id: PropTypes.string,
-<<<<<<< HEAD
   qty: PropTypes.number,
   shipping: PropTypes.bool,
   addtocart: PropTypes.func,
-=======
->>>>>>> c13e84b (concluido requisito 07 implementada logica para redirecionamento da pagina do produto)
 }.isRequired;

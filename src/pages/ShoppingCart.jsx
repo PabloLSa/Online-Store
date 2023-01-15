@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 // import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import ProductCard from '../components/ProductCard';
 // import ListedProduct from '../components/ListedProduct';
 
