@@ -65,12 +65,11 @@ export default class ShoppingCart extends Component {
           <Link to="/checkout" data-testid="checkout-products">Finalizar a Compra</Link>
         </div>
       ) : (
-        <div
+        <span
           data-testid="shopping-cart-empty-message"
         >
           Seu carrinho está vazio
-
-        </div>
+        </span>
       );
   }
 }
