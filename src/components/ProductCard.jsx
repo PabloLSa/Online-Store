@@ -5,9 +5,8 @@ import Button from './Button';
 
 export default class ProductCard extends Component {
   render() {
-    const { title, thumbnail, price, id,
-      qty, addtocart, pathname, shipping: { free_shipping: freeshipping } } = this.props;
-    console.log(freeshipping);
+    const { title, thumbnail, price, id, qty, addtocart, pathname,
+      shipping: { free_shipping: freeshipping = false } = {} } = this.props; // {} nos shipping resolve problema de retorno undefined
     return (
       <div data-testid="product">
         {pathname
