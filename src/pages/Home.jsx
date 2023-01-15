@@ -14,6 +14,7 @@ export default class Home extends Component {
     filtro: '',
     apiResults: [],
     categories: [],
+    cart: [],
     renderQty: 0,
   };
 
