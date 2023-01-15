@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { SelectEstade } from './SelectEstade';
+// import { SelectEstade } from './SelectEstade';
+import SelectEstade from './SelectEstade';
 
 class InformacoesComprador extends Component {
   render() {

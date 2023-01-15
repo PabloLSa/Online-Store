@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Button from './Button';
 
 export default class ProductCard extends Component {
@@ -41,6 +42,9 @@ export default class ProductCard extends Component {
         )}
         <p>{pathname ? `R$${price * qty}` : `R$${price}`}</p>
 =======
+=======
+import Button from './Button';
+>>>>>>> 877227b (fix errors)
 
 export default class ProductCard extends Component {
   render() {

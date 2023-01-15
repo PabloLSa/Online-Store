@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectEstade extends Component { // crianndo option do estado de endereço do comprador
+export default class SelectEstade extends Component { // crianndo option do estado de endereço do comprador
   state = {
     estado: [],
   };
@@ -29,5 +29,3 @@ class SelectEstade extends Component { // crianndo option do estado de endereço
     );
   }
 }
-
-export default SelectEstade;

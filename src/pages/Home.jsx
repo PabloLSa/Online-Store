@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '../components/Button';
-import { ProductCard } from '../components/ProductCard';
+import Button from '../components/Button';
 import Input from '../components/Input';
 import ProductCard from '../components/ProductCard';
 import RadioButon from '../components/RadioButon';
