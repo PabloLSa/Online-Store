@@ -36,7 +36,14 @@ export default class Product extends Component {
     const { title, price, thumbnail,
       available_quantity: available } = await getProductById(id);
 
-    this.setState({ title, price, thumbnail, id, available });
+    this.setState({ title,
+      price,
+      thumbnail,
+      id,
+      available,
+      email: '',
+      rating: 0,
+      invalidtSubmit: false });
   };
 
   addToCart = async (params) => {
@@ -45,17 +52,10 @@ export default class Product extends Component {
     let filteredProducts = [];
     const existsProduct = products?.some((prod) => prod.id === id);
     if (!existsProduct) {
-     
       filteredProducts = [...products, { id,
         title,
-     
         price,
-     
         thumbnail,
-      email: '',
-      rating: 0,
-      invalidtSubmit: false,
-   ,
         qty: 1,
         available }];
     } else {

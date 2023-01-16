@@ -83,7 +83,7 @@ export default class Evaluation extends Component {
           >
             Avaliar
           </button>
-          {invalidtSubmit ? <h1 data-testid="error-msg">Campos inválidos</h1> : ''}
+          {invalidtSubmit && <h1 data-testid="error-msg">Campos inválidos</h1>}
         </form>
       </div>
     );
